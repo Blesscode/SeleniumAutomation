@@ -1,8 +1,6 @@
 # Selenium Automation Testing
 
-# 🧪 Selenium Automation Testing Index
-
-## 📘 Contents
+## 📘 Index
 
 1. 📚 [Overview](#overview)
 2. [Selenium Components](#2-selenium-components)
