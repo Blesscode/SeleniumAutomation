@@ -56,13 +56,23 @@
 
 10. [Wait Strategies](#10-wait-strategies)
 
-    - a. [Implicit Wait](#a-implicit-wait)
-    - b. [Explicit & Fluent Wait](#b-Explicit--fluent-waits)
-    - c. [Thread.sleep() Note](#c-threadsleep-note)
+- a. [Implicit Wait (Only Consider Time for Wait)](#a-implicit-waitonly-conider-time-for-wait)
+  - i. [How it Works](#i-how-works)
+  - ii. [Advantage & Dis-Advantage](#ii-advantage--dis-advantage)
+  - iii. [Compare to thread.sleep()](#iii-compare-to-threadsleep)
+- b. [Explicit & Fluent Wait (Conider Time & Condition for wait)](#b-explicit--fluent-wait--conider-time--condition-for-wait)
+  - [Explicit Wait](#explicit-wait)
+    - i. [How it Works](#i-how-works-1)
+    - ii. [Advantage & Dis-Advantage](#ii-advantage--dis-advantage-1)
+  - [Fluent Wait](#fluent-wait)
+    - i. [How it Works](#i-how-works-2)
+    - ii. [Advantage & Dis-Advantage](#ii-advantage--dis-advantage-2)
+- c. [Thread.sleep() Note (Only Consider Time for Wait)](#c-threadsleep-only-conider-time-for-wait)
+  - i. [Thread.sleep() – Advantage & Dis-Advantage](#i-advantage--dis-advantage)
 
 11. [Common Exceptions](#11-common-exceptions)
 
-12. [Practice Website](#12-practice-website)
+12. [Practice Website](#n-practice-website)
 
 ---
 
