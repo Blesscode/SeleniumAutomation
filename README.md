@@ -452,25 +452,223 @@ Locates elements using XPath expression.
 
 # 10 Wait Strategies
 
-In selenium we have only 2 type of wait
+- We use wait strategies in cases where: Your page loads slower than automation script = so when script runs it dosen't find elements and show error ,but actually everyting is fine just the page loads slowly
+- This is called syncronization problem
+- So what wait does is it actually tells to wait for some time before searching/checking for that element
 
-## a. Implicit wait
+**In selenium we have only 2 type of wait strategies**
 
-## b. Explicit & Fluent Wait
+## a. Implicit wait[Only Conider Time for wait ]
 
+### i. How works
+
+- Keept at the begining of the page Before the driver is added
+- only write one time for each method/page
+- Applicable for all the statements in your method That is you don't have to write the same code line again and again before each action to perform wait
+- will automatically see with element is facing Synchronization problem and the wait before that element
+- It will continue to stay alive until you close the driver: That is before closing the driver it will see all the methods and solve the synchronization problem of all the methods that are present before closing the driver
+- If the page is open faster than the maximum time then it will not wait for the full time to complete but it will move forward thereby **increase performance of script**
+- We Provide the max time to load here : i.e. The maximum time that the website will try to load That is if you provide 15mins as a maximum time then your website should be loaded within 15mins because waiting for more than 15mins doesn't make sense and there should be an issue that you need to address
+
+### ii. Advantage & Dis-Advantage
+
+| SNo | Advantage                                                                                                                | Dis-Advantage                                                                                                       |
+| --- | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------- |
+| 1   | easy to use                                                                                                              | If the page is more slow & takes more than the max time you provide to method to load : then you will get exception |
+| 2   | If the page is loaded fater time is not wasted you move forward,don't wait for complete time to be over**no time waste** |                                                                                                                     |
+| 3   | Only write for once                                                                                                      |                                                                                                                     |
+| 4   |                                                                                                                          | Hard Coded value                                                                                                    |
+
+### iii. Compare to thread.sleep()
+
+| SNo | thread.sleep()                                                                                                        | Implicit wait                                                                                        |
+| --- | --------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| 1   | wait until the hard coded time is over dosen't matter if the page is already loaded,you still wait until time is over | As soon as the page is loaded , don't waste time to complete the full time provided you move forward |
+| 2   | write every time you need                                                                                             | only write once                                                                                      |
+| 3   | Hard code value                                                                                                       | Hard Code value                                                                                      |
+
+```
+CODE:
+webDriver driver=new ChromeDriver();  //get chrome driver to run chrome browser
+/*Now wait for page to load before jumping into finding web page elements */
+driver.manage.timeouts().implicitlyWait(Duration.ofSeconds(5))
+/*after the wait is over now search or do want you want to do on the page*/
+driver.get("url");//goto the page using get/navigate
+driver.manage().window().maximize();//max the browser window [optional]
+driver.findElement(By.xpath("//input[@id='email']")).sendKeys("abc@gmail.com"); //send email to the email input feild
+
+```
+
+## b. Explicit & Fluent Wait [ Conider Time & Condition for wait ]
+
+## Explicit Wait
+
+### i. How works
+
+- Specific to elements not like implicit i.e. common to all statements (write once)
+- Requires an extra class WebDriverWait(takes driver,the time) : this will create a time for explicit wait
+- Now we require condition : which will be provided by **obj of WebDriverWait.until()** method
+- **IT WAIT FOR CONDITION TO BE TRUE THEN CHECK IF THE MAX TIME IS USED**
+- until methods accepts conditions using : **ExpectedConditions** class which provide multiple conditions options as methods
+- Summary => mywait.until(ConditionBox.ConditionOptions)
 - Explicit wait -> under explicit wait we have Fluent Wait
+- **LOCATING ELEMENT & IDENTIFYING THE ELEMENT is inclusive** no need to re-locate ,it locates and returns the web element
+- It returns webElement
+- **works effectvly on conditions based situation**
 
-## c. Thread.sleep() Note
+### ii. Advantage & Dis-Advantage
+
+| SNo | Advantage                                                                        | Dis-Advantage                                                                                                                                          |
+| --- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 1   | will provide the max/ideal time the site is allowed to load                      |                                                                                                                                                        |
+| 2   | no need to write driver.find method : identifying is iclusive                    | exception                                                                                                                                              |
+| 3   |                                                                                  | You have to write the code line again and again each time above the action you want to wait befor : predict the scanarios where wait would be required |
+| 4   | will wait for condition to be true ,then consider time it takes to load the page |                                                                                                                                                        |
+
+```
+CODE:
+webDriver driver=new ChromeDriver();  //get chrome driver to run chrome browser
+
+WebDriverWait mywait=new WebDriverWait(driver,Duration.ofSeconds(10)); //decelaration : this is my explicit wait
+
+
+driver.get("url");//goto the page using get/navigate
+driver.manage().window().maximize();//max the browser window [optional]
+
+/*Now wait for page to load before jumping into finding web page elements */
+
+WebElement txtEmail=mywait.until(ExpectedConditions.visiblityOfElementLocated(By.xpath("//input[@id='email']")));
+txtEmail.sendKeys("abc@gmail.com");
+driver.close();
+
+
+// no need for this line above direct webElement is returned❌driver.findElement(By.xpath("//input[@id='email']")).sendKeys("abc@gmail.com"); //send email to the email input feild
+
+```
+
+## Fluent Wait
+
+### i. How works
+
+- Specific to elements not like implicit i.e. common to all statements (write once)
+- require time+condition
+- time in decleartion : done using method chaining
+- condition in implementation : until takes condition as an arrow fn
+- Addtion for explicit wait is :
+  - It will wait form max : 30sec for the webiste to load
+  - And in that boundary of 30sec it will go and check after every 5sec if the page is loaded or not
+  - In every cycle of 5 sec wait then check then 5sec wait and check till time reaches 30sec there is a chance that we check and the element is not loaded then: that exception will be handled by it for each cycle
+- After 30 sec if elemnt is not found then the exception will not be handled/ignored and error will be shown
+
+### ii. Advantage & Dis-Advantage
+
+```
+CODE:
+webDriver driver=new ChromeDriver();  //get chrome driver to run chrome browser
+
+//decelaration : this is my fluent wait
+wait<WebDriver> mywait=new FluentWait<WebDriver>(driver)
+            .withTimeOut(Duration.ofSeconds(30))
+            .pollingEverything(Duration.ofSeconds(5))
+            .ignore(NoSuchElementException.class);
+
+
+driver.get("url");//goto the page using get/navigate
+driver.manage().window().maximize();//max the browser window [optional]
+
+
+/*Now wait for page to load before jumping into finding web page elements */
+webElement emailTxt=mywait.until(new Function<WebDriver,WebElement>(){
+   public WebElement apply(WebDriver driver){
+      return driver.findElement(By.xpath("//input[@id='email']"));
+   }
+})
+
+
+// no need for this line above direct webElement is returned❌driver.findElement(By.xpath("//input[@id='email']")).sendKeys("abc@gmail.com"); //send email to the email input feild
+
+driver.close();
+
+```
+
+## c. Thread.sleep() [Only Conider Time for wait ]
 
 NOTE: thread.sleep()
 method came from java its not a wait strategy of selenium.but can be used for wait but will wait for exact time period that is defined in it.
+
+### i. Advantage & Dis-Advantage
+
+| SNo | Advantage                                                         | Dis-Advantage                                                                             |
+| --- | ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| 1   | Can set custom polling time (e.g., check every 5 sec)             | Complex syntax compared to implicit and explicit wait                                     |
+| 2   | Can ignore exceptions (like `NoSuchElementException`) during wait | If the element is slow and takes more time than given → exception will occur              |
+| 3   | Supports custom conditions using functions                        | Too frequent polling can affect performance (e.g., if polling every 100 ms unnecessarily) |
+| 4   | Works well with elements that load dynamically or with AJAX       | Need to write wait code again and again before each required action                       |
+| 5   | Doesn’t wait full time if condition is met early → saves time     | Uses hardcoded time and polling values unless managed through configuration               |
+|     |
+
+```
+CODE:
+webDriver driver=new ChromeDriver();  //get chrome driver to run chrome browser
+driver.get("url");//goto the page using get/navigate
+driver.manage().window().maximize();//max the browser window [optional]
+/*Now wait for page to load before jumping into finding web page elements */
+thread.sleep(1000); //seconds
+/*after the wait is over now search or do want you want to do on the page*/
+driver.findElement(By.xpath("//input[@id='email']")).sendKeys("abc@gmail.com"); //send email to the email input feild
+
+```
+
+## d. Summary
+
+| Feature / Wait Type       | **Implicit Wait**               | **Explicit Wait**                                 | **Fluent Wait**                                                    | **Thread.sleep()**             |
+| ------------------------- | ------------------------------- | ------------------------------------------------- | ------------------------------------------------------------------ | ------------------------------ |
+| **Applies To**            | All elements globally           | Specific element(s)                               | Specific element(s)                                                | Whole thread                   |
+| **Waits for Condition**   | ❌ Only time                    | ✅ Yes (uses ExpectedConditions)                  | ✅ Yes (custom condition via `Function`)                           | ❌ No, fixed time              |
+| **Polling Frequency**     | Default (500ms)                 | Default (500ms)                                   | ✅ Customizable (e.g., every 5 sec)                                | ❌ Not applicable              |
+| **Exception Handling**    | ❌ Basic                        | ❌ Limited                                        | ✅ Can ignore specific exceptions (e.g., `NoSuchElementException`) | ❌ None                        |
+| **Reusability**           | ✅ Set once per session         | ❌ Needs to be written before each target element | ❌ Needs to be written before each target element                  | ❌ Needs to be used every time |
+| **Performance**           | ✅ Efficient if page loads fast | ✅ Efficient (waits only if needed)               | ✅ Efficient with retries (but slower if polling too frequent)     | ❌ Always waits full time      |
+| **Control & Flexibility** | ❌ Low (only timeout)           | ✅ Medium (condition-based)                       | ✅✅ High (time + polling + exception control)                     | ❌ None                        |
+| **Syntax Complexity**     | ✅ Simple                       | ⚠️ Moderate                                       | ❌ Verbose (method chaining + function)                            | ✅ Very Simple                 |
+| **Use Case**              | Basic sync for all actions      | Sync on specific conditions                       | Dynamic elements, custom wait logic                                | Quick temporary wait           |
 
 # 11 Common Exceptions
 
 1. NoSuchElementException = synchronization problem(when your automation script run faster than the page)
 2. ElementNotFoundException = when the locator is incorrect
 
-# 12 Practice Website
+# 12 Handling Form Feilds
+
+## a. Checkboxes
+
+## b. Frames
+
+### i. Frames
+
+### ii. IFrames
+
+### iii. Nested Frames
+
+## c. Dropdown
+
+### i. Select Dropdown
+
+### ii. Bootstrap Dropdown
+
+### iii. Hidden Dropdown
+
+### iv. Auto Sugestion Dropdown
+
+## d. Table
+
+### i. Static Table
+
+### ii. Dynamic Pagenation Web Table
+
+## e. Date Pickers
+
+# n Practice Website
 
 1. OrangeHRM
 2. Adactin
