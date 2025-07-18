@@ -367,6 +367,17 @@ Locates elements using XPath expression.
 | 2    | Perform manage operations (browser-level operations) | - Open browser<br>- `deleteAllCookies()`<br>- `setSize()`<br>- `setPosition()`<br>- `maximize()`                                                                                          | _To be added_ |
 | 3    | Perform navigation operations                        | - Open browser<br>- `maximize()` <br>- `deleteAllCookies()` <br>- goto url <br>- navigate to diff url <br>- navigate to previous page <br>-navigate to next page<br>-refresh current page | _To be added_ |
 
+# Wait Strategies 
+In selenium we have only 2 type of wait 
+1. Implicit wait
+2. Explicit wait -> under explicit wait we have Fluent Wait
+
+   NOTE: thread.sleep() method came from java its not a wait strategy of selenium.but can be used for wait but will wait for exact time period that is defined in it.
+
+# Most Common Type of Exceptions Occur
+1. NoSuchElementException = synchronization problem(when your automation script run faster than the page)
+2. ElementNotFoundException = when the locator is incorrect
+   
 # Practice Website
 
 1. OrangeHRM
