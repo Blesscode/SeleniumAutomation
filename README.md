@@ -1,4 +1,71 @@
 # Selenium Automation Testing
+# 🧪 Selenium Automation Testing – README Index
+
+## 📘 Contents
+
+### 1. 📚 Overview
+- Introduction to Selenium Automation Testing
+
+### 2.  Selenium Components
+- [Selenium IDE](#1-selenium-ide)
+- [Selenium WebDriver](#2-selenium-web-driver)
+  - Key Concepts
+  - WebDriver Hierarchy
+- [Selenium Grid](#3-selenium-grid)
+  - Purpose
+  - Architecture & Use Case
+
+### 3. 🏗 Architecture & Design
+- [High-Level Design (HLD)](#hld)
+- [Selenium Architecture Diagram](#arch)
+- [JAR Files (Java Archive)](#jars)
+
+### 4. ⚙️ Environment Setup
+- [Manual Setup (Deprecated)](#old-manual-env-setup-not-recommended)
+- [Automated Setup with Maven](#automated-env-setup-mavenbuild-tool)
+
+### 5. 🔧 Selenium Interfaces & Methods
+- [SearchContext Interface](#1-searchcontexti)
+- [WebDriver Interface](#2-webdriver-i)
+- [JavascriptExecutor Interface](#3-javascriptexecutor-i)
+- [TakesScreenshot Interface](#4-takesscreenshot-i)
+
+### 6. 🌐 Browser Navigation
+- [Navigation Methods](#-navigation-methods-in-selenium)
+- [Get vs Navigate](#get-vs-navigate)
+
+### 7. 🔍 WebDriver & WebElement
+- [Locator Methods](#-webdriver-interface--locator-methods)
+- [Action & Property Methods](#-webelement-interface--action--property-methods)
+- [WebElement Testing Workflow](#webelements-testing-process)
+
+### 8. 🧭 Locators in Selenium
+- [Locator Types](#locators)
+- [Locator Syntax Table](#-selenium-locators--markdown-table)
+- [XPath Essentials](#xpath-string)
+  - Absolute & Relative XPath
+  - XPath Tips & Tricks
+  - XPath Traversal
+  - Special Characters in XPath
+
+### 9. 📋 General Test Scenarios
+- [Browser Setup by Input](#general-cases)
+- [Manage Browser Options](#general-cases)
+- [Full Navigation Flow](#general-cases)
+
+### 10. ⏱ Wait Strategies
+- [Implicit Wait](#wait-strategies)
+- [Explicit & Fluent Wait](#wait-strategies)
+- [Note on `Thread.sleep()`](#wait-strategies)
+
+### 11. 🐞 Common Exceptions
+- [NoSuchElementException](#most-common-type-of-exceptions-occur)
+- [ElementNotFoundException](#most-common-type-of-exceptions-occur)
+
+### 12. 🔗 Practice Website
+- [Practice Resource](#practice-website)
+
+---
 
 # ✅ Selenium Components
 
