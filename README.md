@@ -1,24 +1,23 @@
 # Selenium Automation Testing
-# 🧪 Selenium Automation Testing – README Index
-
+# 🧪 Selenium Automation Testing Index
 ## 📘 Contents
 
-### 1. 📚 Overview
-### 2.  Selenium Components
-- [Selenium IDE](#1-selenium-ide)
-- [Selenium WebDriver](#2-selenium-web-driver)
-  - Key Concepts
-  - WebDriver Hierarchy
-- [Selenium Grid](#3-selenium-grid)
-  - Purpose
-  - Architecture & Use Case
-### 3. 🏗 Architecture & Design
-- [High-Level Design (HLD)](#hld)
-- [Selenium Architecture Diagram](#arch)
-- [JAR Files (Java Archive)](#jars)
-### 4. ⚙️ Environment Setup
-- [Manual Setup (Deprecated)](#old-manual-env-setup-not-recommended)
-- [Automated Setup with Maven](#automated-env-setup-mavenbuild-tool)
+1. 📚 [Overview](#overview)
+2. [Selenium Components](#1-selenium-components)
+	a. [Selenium IDE](#a-selenium-ide)
+	b. [Selenium WebDriver](#b-selenium-web-driver)  
+  		 i. [Key Concepts](#i-selenium-web-driver)  
+      		ii. [WebDriver Hierarchy](#ii-selenium-web-driver) 
+	c. [Selenium Grid](#c-selenium-grid)
+		 i. [Purpose](#i-selenium-grid)  
+     		 ii. [Architecture & Use Case](#ii-selenium-grid)
+### 3. 🏗 Architecture & Design(#2-architecture--design)
+	a. [High-Level Design (HLD)](#a-high-level-design-hld)  
+   	b. [Selenium Architecture Diagram](#b-selenium-architecture-diagram)  
+   	c. [JAR Files (Java Archive)](#c-jar-files-java-archive)
+### 4. ⚙️ Environment Setup(#️3-environment-setup)  
+	a. [Manual Setup (Deprecated)](#a-old-manual-env-setup-not-recommended)  
+	b. [Automated Setup with Maven](#b-automated-env-setup-mavenbuild-tool)
 ### Selenium Methods
 1. 🔧 Selenium Interfaces Methods
      a. Selenium Interfaces and their respective method (Description)
@@ -59,11 +58,11 @@
 
 ---
 
-# ✅ Selenium Components
+# 1 Selenium Components
 
 ---
 
-## 1. **Selenium IDE**
+## a. **Selenium IDE**
 
 - A browser plugin (mostly for Chrome and Firefox)
 - Used for:
@@ -75,13 +74,14 @@
 
 ---
 
-## 2. **Selenium web driver**
+## b. **Selenium web driver**
 
     - component in selenium
     - is an interface -->
     	[ contains methods] -------------->implement in a class RemoteWebDriver Class ---- extended to child class [ChromeDriver,FireFoxDriver,EdgeDriver]
     - is an API
-    ### 🔹 Key Concepts:
+   
+### i. Key Concepts:
 
 | Concept                 | Description                                                                                           |
 | ----------------------- | ----------------------------------------------------------------------------------------------------- |
@@ -89,7 +89,7 @@
 | **Implemented by**      | `RemoteWebDriver` class implements the WebDriver interface.                                           |
 | **Extended by**         | Browser-specific drivers like `ChromeDriver`, `FirefoxDriver`, `EdgeDriver` extend `RemoteWebDriver`. |
 
-### 🔹 WebDriver Hierarchy
+### ii. WebDriver Hierarchy
 
 ```text
 SearchContext [I]  <-- root interface
@@ -103,18 +103,18 @@ RemoteWebDriver [C]  <-- implementation of WebDriver
 ChromeDriver [C]      FirefoxDriver [C]     EdgeDriver [C]
 ```
 
-## 3. **Selenium Grid**
-
-- **Purpose**: Run tests in parallel across multiple machines/browsers/environments.
-- **Architecture**:
+## c. **Selenium Grid**
+### i. Purpose
+Run tests in parallel across multiple machines/browsers/environments.
+### ii. Architecture & Use Case
   - **Hub**: Central point to control execution.
   - **Node(s)**: Machines where actual tests run.
--  Use Case:
-    Suppose you want to run your tests on **Chrome + Windows**, **Firefox + Linux**, and **Edge + macOS** all at once. Selenium Grid allows you to do that using parallel test execution.
+  -  Use Case:
+  	-  Suppose you want to run your tests on **Chrome + Windows**, **Firefox + Linux**, and **Edge + macOS** all at once. Selenium Grid allows you to do that using parallel test execution.
 
 ---
-# Architecture & Design
-## High-Level Design (HLD)
+# 2 Architecture & Design
+## a. High-Level Design (HLD)
 
 1. JAVA client = contains java code to call web driver methods
 2. web driver = perform method action on browser & SOMETIME capture info from browser [eg. title of web page,text display on web page]
@@ -123,7 +123,7 @@ ChromeDriver [C]      FirefoxDriver [C]     EdgeDriver [C]
    |
 3. browser
 
-## Selenium Architecture Diagram
+## b. Selenium Architecture Diagram
 
 ```
             SearchContext[I] **root interface**
@@ -138,20 +138,20 @@ ChromeDriver [C]      FirefoxDriver [C]     EdgeDriver [C]
 
 ```
 
-## JAR Files (Java Archive)
+## c. JAR Files (Java Archive)
 
 - Similar to .zip file
 - Compress all java classes,methods,interfaces into 1 single file called jar file
 - `full form` : JavaArchiveFiles
 
-# ⚙️ Environment Setup
+# 3 ⚙️ Environment Setup
 
-## Old Manual Env. Setup **Not Recommended**
+## a. Old Manual Env. Setup **Not Recommended**
 
 1. create a new java project
 2. dowmload webdriver jars(.zip) and add to your project
 
-## Automated Env. Setup **MAVEN[BUILD TOOL]**
+## b. Automated Env. Setup **MAVEN[BUILD TOOL]**
 
 **UNDERSTAND MAVEN AS PLAYSTORE**
 
