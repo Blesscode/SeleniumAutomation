@@ -1,61 +1,70 @@
 # Selenium Automation Testing
+
 # 🧪 Selenium Automation Testing Index
+
 ## 📘 Contents
 
 1. 📚 [Overview](#overview)
-2. [Selenium Components](#1-selenium-components)  
-   a. [Selenium IDE](#a-selenium-ide)  
-   b. [Selenium WebDriver](#b-selenium-webdriver)  
-      i. [Key Concepts](#i-key-concepts)  
-      ii. [WebDriver Hierarchy](#ii-webdriver-hierarchy)  
-   c. [Selenium Grid](#c-selenium-grid)  
-      i. [Purpose](#i-purpose)  
-      ii. [Architecture & Use Case](#ii-architecture--use-case)
-3. [Architecture & Design](#2-architecture--design)  
-   a. [High-Level Design (HLD)](#a-high-level-design-hld)  
-   b. [Selenium Architecture Diagram](#b-selenium-architecture-diagram)  
-   c. [JAR Files (Java Archive)](#c-jar-files-java-archive)
+2. [Selenium Components](#2-selenium-components)
+   - a. [Selenium IDE](#a-selenium-ide)
+   - b. [Selenium WebDriver](#b-selenium-webdriver)
+     - i. [Key Concepts](#i-key-concepts)
+     - ii. [WebDriver Hierarchy](#ii-webdriver-hierarchy)
+   - c. [Selenium Grid](#c-selenium-grid)
+     - i. [Purpose](#i-purpose)
+     - ii. [Architecture & Use Case](#ii-architecture--use-case)
+3. [Architecture & Design](#3-architecture--design)
 
-4. [Environment Setup](#3-environment-setup)  
-   a. [Manual Setup (Deprecated)](#a-old-manual-env-setup-not-recommended)  
-   b. [Automated Setup with Maven](#b-automated-env-setup-mavenbuild-tool)
-### Selenium Methods
-1. 🔧 Selenium Interfaces Methods
-     a. Selenium Interfaces and their respective method (Description)
-	   1. SEARCH CONTEXT
-	   2. WEBDRIVER
-	   3. JAVASCRIPTEXECUTOR
-	   4. SCREENSHOT
-     b. Selenium Interfaces and Method Examples (Real-Time Use Cases)
-3. 🌐 Browser Navigation Methods
-     a. Browser Navigation method (Description)
-	   1. Navigate().to()
-	   2. Refresh()
-	   3. Back()
-	   4. Forword()
-      b. Get Vs Navigate
+   - a. [High-Level Design (HLD)](#a-high-level-design-hld)
+   - b. [Selenium Architecture Diagram](#b-selenium-architecture-diagram)
+   - c. [JAR Files (Java Archive)](#c-jar-files-java-archive)
 
-### 8. 🧭 Locators in Selenium
-- [Locator Types](#locators)
-- [Locator Syntax Table](#-selenium-locators--markdown-table)
-- [XPath Essentials](#xpath-string)
-  - Absolute & Relative XPath
-  - XPath Tips & Tricks
-  - XPath Traversal
-  - Special Characters in XPath
+4. [Environment Setup](#4-environment-setup)
 
-### 9. 📋 General Test Scenarios
-- [Browser Setup by Input](#general-cases)
-- [Manage Browser Options](#general-cases)
-- [Full Navigation Flow](#general-cases)
+   - a. [Manual Setup (Deprecated)](#a-old-manual-env-setup-not-recommended)
+   - b. [Automated Setup with Maven](#b-automated-env-setup-mavenbuild-tool)
 
-### 10. ⏱ Wait Strategies
-- [Implicit Wait](#wait-strategies)
-- [Explicit & Fluent Wait](#wait-strategies)
-- [Note on `Thread.sleep()`](#wait-strategies)
+5. [Selenium Methods](#5-selenium-methods)
 
-### 11. 🐞 Common Exceptions
-### 12. 🔗 Practice Website
+   - a. [Selenium Interfaces and their respective method Description](#a-selenium-interfaces-and-their-respective-method-description)
+     - i. [SearchContext](#i-searchcontexti)
+     - ii. [WebDriver](#ii-webdriver-i)
+     - iii. [JavascriptExecutor](#iii-javascriptexecutor-i)
+     - iv. [TakesScreenshot](#iv-takesscreenshot-i)
+   - b. [Selenium Interfaces and Method Examples (Real-Time Use Cases)](#b-selenium-interfaces-and-method-examples-real-time-use-cases)
+
+6. [Browser Navigation](#6-browser-navigation-methods)
+
+   - a. [Navigation Methods](#a-browser-navigation-method-description)
+   - b. [Get vs Navigate Comparison](#b-get-vs-navigate)
+
+7. [WebDriver & WebElement](#7-selenium-webdriver--webelement-methods)
+
+   - a. [WebDriver Interface-Locator Methods](#a-webdriver-interface-locator-methods)
+   - b. [WebElement Interface-Action & Property Methods](#b-webelement-interface-action--property-methods)
+   - c. [Testing Process](#c-webelements-testing-process)
+
+8. [Locators in Selenium](#8-locators-in-selenium)
+
+   - a. [Locator Types](#a-locator-types)
+   - b. [Locator Syntax Table](#b-selenium-locator-syntax-table)
+   - c. [XPath Essentials](#c-xpath-essentials)
+     - i. [Absolute & Relative XPath](#i-absolute--relative-xpath)
+     - ii. [XPath Tips & Tricks](#ii-xpath-tips--tricks)
+     - iii. [Handling Special Characters in XPath](#iii-handling-special-characters-in-xpath)
+     - iv. [Traversal Techniques](#iv-xpath-traversing-examples)
+
+9. [General Test Scenarios](#9-general-test-scenarios)
+
+10. [Wait Strategies](#10-wait-strategies)
+
+    - a. [Implicit Wait](#a-implicit-wait)
+    - b. [Explicit & Fluent Wait](#b-Explicit--fluent-waits)
+    - c. [Thread.sleep() Note](#c-threadsleep-note)
+
+11. [Common Exceptions](#11-common-exceptions)
+
+12. [Practice Website](#12-practice-website)
 
 ---
 
@@ -81,7 +90,7 @@
     - is an interface -->
     	[ contains methods] -------------->implement in a class RemoteWebDriver Class ---- extended to child class [ChromeDriver,FireFoxDriver,EdgeDriver]
     - is an API
-   
+
 ### i. Key Concepts:
 
 | Concept                 | Description                                                                                           |
@@ -105,16 +114,22 @@ ChromeDriver [C]      FirefoxDriver [C]     EdgeDriver [C]
 ```
 
 ## c. **Selenium Grid**
+
 ### i. Purpose
+
 Run tests in parallel across multiple machines/browsers/environments.
+
 ### ii. Architecture & Use Case
-  - **Hub**: Central point to control execution.
-  - **Node(s)**: Machines where actual tests run.
-  -  Use Case:
-  	-  Suppose you want to run your tests on **Chrome + Windows**, **Firefox + Linux**, and **Edge + macOS** all at once. Selenium Grid allows you to do that using parallel test execution.
+
+- **Hub**: Central point to control execution.
+- **Node(s)**: Machines where actual tests run.
+- Use Case:
+- Suppose you want to run your tests on **Chrome + Windows**, **Firefox + Linux**, and **Edge + macOS** all at once. Selenium Grid allows you to do that using parallel test execution.
 
 ---
+
 # 2 Architecture & Design
+
 ## a. High-Level Design (HLD)
 
 1. JAVA client = contains java code to call web driver methods
@@ -162,15 +177,14 @@ Run tests in parallel across multiple machines/browsers/environments.
 4. add selenium dependency [mvn repository]
    in boot project the version is managed by boot
 5. Update project
------------------------------------------------------------------------------------------
 
+---
 
-# Selenium Methods
-## 🔧 Selenium Interfaces Methods
+# 5 Selenium Methods
 
- ## Selenium Interfaces and their respective method Description
+## a. Selenium Interfaces and their respective method Description
 
-### 1. SearchContext[I]
+### i. SearchContext[I]
 
 ---
 
@@ -181,7 +195,7 @@ Run tests in parallel across multiple machines/browsers/environments.
 
 ---
 
-### 2. WebDriver [I]
+### ii. WebDriver [I]
 
 | Name                 | Work                                                              | Returns            | Example                                                                 |
 | -------------------- | ----------------------------------------------------------------- | ------------------ | ----------------------------------------------------------------------- |
@@ -198,24 +212,24 @@ Run tests in parallel across multiple machines/browsers/environments.
 | `close()`            | Closes the current browser window.                                | `void`             | `driver.close();`                                                       |
 | `quit()`             | Quits the driver and closes every associated window.              | `void`             | `driver.quit();`                                                        |
 
-### 3. JavascriptExecutor [I]
+### iii. JavascriptExecutor [I]
 
 | Name                                  | Work                                                         | Returns  | Example                                                                                                                                   |
 | ------------------------------------- | ------------------------------------------------------------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
 | `executeScript(script, args...)`      | Executes synchronous JavaScript in the browser.              | `Object` | `JavascriptExecutor js = (JavascriptExecutor) driver; js.executeScript("document.getElementById('btn').click();");`                       |
 | `executeAsyncScript(script, args...)` | Executes asynchronous JavaScript using a callback mechanism. | `Object` | `JavascriptExecutor js = (JavascriptExecutor) driver; js.executeAsyncScript("window.setTimeout(arguments[arguments.length - 1], 500);");` |
 
-### 4. TakesScreenshot [I]
+### iv. TakesScreenshot [I]
 
 | Name                             | Work                                           | Returns                       | Example                                                                   |
 | -------------------------------- | ---------------------------------------------- | ----------------------------- | ------------------------------------------------------------------------- |
 | `getScreenshotAs(OutputType<T>)` | Captures the screenshot of the browser window. | `File`, `String`, or `byte[]` | `File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);` |
 
-## 🏃‍♀️‍➡️Selenium Interfaces and Method Examples (Real-Time Use Cases)
+## b. Selenium Interfaces and Method Examples (Real-Time Use Cases)
 
 ---
 
-## ✅ 1. `SearchContext [I]`
+## ✅ i. `SearchContext [I]`
 
 | Method             | Real-Time Use Case                                                                                                                                                    |
 | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -224,7 +238,7 @@ Run tests in parallel across multiple machines/browsers/environments.
 
 ---
 
-## ✅ 2. `WebDriver [I]`
+## ✅ ii. `WebDriver [I]`
 
 | Method               | Real-Time Use Case                                                                                                                                   |
 | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -243,7 +257,7 @@ Run tests in parallel across multiple machines/browsers/environments.
 
 ---
 
-## ✅ 3. `JavascriptExecutor [I]`
+## ✅ iii. `JavascriptExecutor [I]`
 
 | Method                 | Real-Time Use Case                                                                                                                                                        |
 | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -252,7 +266,7 @@ Run tests in parallel across multiple machines/browsers/environments.
 
 ---
 
-## ✅ 4. `TakesScreenshot [I]`
+## ✅ iv. `TakesScreenshot [I]`
 
 | Method                        | Real-Time Use Case                                                                                                                                                                                                          |
 | ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -260,9 +274,9 @@ Run tests in parallel across multiple machines/browsers/environments.
 
 ---
 
-## 🌐 Browser Navigation Methods
+## 6 Browser Navigation Methods
 
-##  Browser Navigation method (Description)
+## a. Browser Navigation method (Description)
 
 | S.No | Method                      | Description                                            | Return Type | Example Code                                   |
 | ---- | --------------------------- | ------------------------------------------------------ | ----------- | ---------------------------------------------- |
@@ -271,30 +285,29 @@ Run tests in parallel across multiple machines/browsers/environments.
 | 3    | `navigate().back()`         | Navigates back to the previous page in browser history | `void`      | `driver.navigate().back();`                    |
 | 4    | `navigate().forward()`      | Moves forward to the next page in browser history      | `void`      | `driver.navigate().forward();`                 |
 
-## Get Vs Navigate
+## b. Get Vs Navigate
 
-
-| Feature                      | `driver.get(url)`                         | `driver.navigate().to(url)`                         |
-|-----------------------------|--------------------------------------------|-----------------------------------------------------|
-| **Purpose**                 | Opens a URL in the browser                 | Also opens a URL in the browser                     |
-| **Return Type**             | `void`                                     | `void`                                              |
-| **Navigation History**      | ❌ Does **not** maintain browser history   | ✅ Maintains browser history (allows back/forward)   |
-| **Chaining**                | ❌ Cannot be chained                        | ✅ Can be chained using `navigate()` object          |
+| Feature                       | `driver.get(url)`                            | `driver.navigate().to(url)`                        |
+| ----------------------------- | -------------------------------------------- | -------------------------------------------------- |
+| **Purpose**                   | Opens a URL in the browser                   | Also opens a URL in the browser                    |
+| **Return Type**               | `void`                                       | `void`                                             |
+| **Navigation History**        | ❌ Does **not** maintain browser history     | ✅ Maintains browser history (allows back/forward) |
+| **Chaining**                  | ❌ Cannot be chained                         | ✅ Can be chained using `navigate()` object        |
 | **Support for Other Actions** | ❌ No support for `back()`, `forward()` etc. | ✅ Supports `back()`, `forward()`, `refresh()`     |
-| **Common Use Case**         | Basic page load                            | Page load with navigation control                   |
-| **Syntax**                  | `driver.get("https://example.com")`        | `driver.navigate().to("https://example.com")`       |
-| **Performance**             | ⚡ Slightly faster (direct load)            | 🕒 Slightly slower due to history tracking           |
+| **Common Use Case**           | Basic page load                              | Page load with navigation control                  |
+| **Syntax**                    | `driver.get("https://example.com")`          | `driver.navigate().to("https://example.com")`      |
+| **Performance**               | ⚡ Slightly faster (direct load)             | 🕒 Slightly slower due to history tracking         |
 
 > **✅ Tip:**  
 > Use `get()` when simply loading a page. Use `navigate().to()` when you plan to use browser navigation (like `back()`, `forward()`).
 
-# 📌 Selenium WebDriver & WebElement Methods
+# 7 Selenium WebDriver & WebElement Methods
 
 - WebElements : Anything which is present on webpage is called as webelement
 
 ---
 
-## 🔍 WebDriver Interface – Locator Methods
+## a. WebDriver Interface-Locator Methods
 
 | S.No | Method                | Description                                                 | Return Type        | Example Code                                                      |
 | ---- | --------------------- | ----------------------------------------------------------- | ------------------ | ----------------------------------------------------------------- |
@@ -303,7 +316,7 @@ Run tests in parallel across multiple machines/browsers/environments.
 
 ---
 
-## 📍 WebElement Interface – Action & Property Methods
+## b. WebElement Interface-Action & Property Methods
 
 | S.No | Method                                 | Description                                               | Return Type | Example Code                                                   |
 | ---- | -------------------------------------- | --------------------------------------------------------- | ----------- | -------------------------------------------------------------- |
@@ -324,15 +337,19 @@ Run tests in parallel across multiple machines/browsers/environments.
 
 ---
 
-## WebElements testing process
+## c. WebElements testing process
 
 1. Inspect elem
 2. locate elem
 3. find elem
 4. perform action
---------------------------------------------------------------------------------------------
-# 🧭 Locators in Selenium
-## Locator Types
+
+---
+
+# 8 Locators in Selenium
+
+## a. Locator Types
+
 1. id[string] By.id("username")
 2. name[string] By.name("username")
 3. classname[string]
@@ -342,7 +359,7 @@ Run tests in parallel across multiple machines/browsers/environments.
 7. cssselector[string] : tagname['attribute name'='attribute value'] input[type='password'] || id=> input#email class=>tagName.classValue
 8. xpath[string]
 
-# 🔍 Selenium Locator Syntax Table
+# b. Selenium Locator Syntax Table
 
 | S.No | Locator Type      | Syntax Example                         | Description / Usage                                                       |
 | ---- | ----------------- | -------------------------------------- | ------------------------------------------------------------------------- |
@@ -369,11 +386,14 @@ Run tests in parallel across multiple machines/browsers/environments.
 
 💡 **Note**: Prefer `id`, `name`, and `cssSelector` when available — they’re usually faster and more readable.
 
-##  XPath Essentials
+## c. XPath Essentials
 
 Locates elements using XPath expression.
-### Absolute & Relative XPath
- 1. Absolute XPath (not recommended)
+
+### i. Absolute & Relative XPath
+
+1.  Absolute XPath (not recommended)
+
 ```
 /html/body/div[2]/form/input[1]
 ```
@@ -390,7 +410,8 @@ Locates elements using XPath expression.
 //input[@id='email']                      // By specific attribute
 ```
 
-## XPath Tips & Tricks
+### ii. XPath Tips & Tricks
+
 //_ = all elements
 //_[atribute='value'] = all matching attribute value
 //tagname = all matching tagname
@@ -402,7 +423,7 @@ Locates elements using XPath expression.
          xpath by text       = tagname[text()='tv']
           xpath by  contains =   tn[contains(text(),'tv')] OR tn[contains(@an,'av')] OR img[contains(@src,'img')]
 
-## 🛠️ Handling Special Characters in XPath
+### iii. Handling Special Characters in XPath
 
 ```
 //a[contains(text(),"It's here")]         // use double quotes outside
@@ -411,7 +432,7 @@ Locates elements using XPath expression.
 
 ---
 
-## 🔄 XPath Traversing Examples
+## iv. XPath Traversing Examples
 
 | Traversing Type   | Example                                            | Description                   |
 | ----------------- | -------------------------------------------------- | ----------------------------- |
@@ -423,7 +444,7 @@ Locates elements using XPath expression.
 
 ---
 
-#  📋 General Test Scenarios
+# 9 General Test Scenarios
 
 | S.No | Task                                                 | Action Steps                                                                                                                                                                              | Link to Code  |
 | ---- | ---------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
@@ -431,17 +452,27 @@ Locates elements using XPath expression.
 | 2    | Perform manage operations (browser-level operations) | - Open browser<br>- `deleteAllCookies()`<br>- `setSize()`<br>- `setPosition()`<br>- `maximize()`                                                                                          | _To be added_ |
 | 3    | Perform navigation operations                        | - Open browser<br>- `maximize()` <br>- `deleteAllCookies()` <br>- goto url <br>- navigate to diff url <br>- navigate to previous page <br>-navigate to next page<br>-refresh current page | _To be added_ |
 
-# ⏱ Wait Strategies
-In selenium we have only 2 type of wait 
-1. Implicit wait
-2. Explicit wait -> under explicit wait we have Fluent Wait
+# 10 Wait Strategies
 
-   NOTE: thread.sleep() method came from java its not a wait strategy of selenium.but can be used for wait but will wait for exact time period that is defined in it.
+In selenium we have only 2 type of wait
 
-# 🐞 Common Exceptions
+## a. Implicit wait
+
+## b. Explicit & Fluent Wait
+
+- Explicit wait -> under explicit wait we have Fluent Wait
+
+## c. Thread.sleep() Note
+
+NOTE: thread.sleep()
+method came from java its not a wait strategy of selenium.but can be used for wait but will wait for exact time period that is defined in it.
+
+# 11 Common Exceptions
+
 1. NoSuchElementException = synchronization problem(when your automation script run faster than the page)
 2. ElementNotFoundException = when the locator is incorrect
-   
-# 🔗 Practice Website
+
+# 12 Practice Website
+
 1. OrangeHRM
 2. Adactin
