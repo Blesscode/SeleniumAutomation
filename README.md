@@ -4,8 +4,6 @@
 ## 📘 Contents
 
 ### 1. 📚 Overview
-- Introduction to Selenium Automation Testing
-
 ### 2.  Selenium Components
 - [Selenium IDE](#1-selenium-ide)
 - [Selenium WebDriver](#2-selenium-web-driver)
@@ -14,30 +12,28 @@
 - [Selenium Grid](#3-selenium-grid)
   - Purpose
   - Architecture & Use Case
-
 ### 3. 🏗 Architecture & Design
 - [High-Level Design (HLD)](#hld)
 - [Selenium Architecture Diagram](#arch)
 - [JAR Files (Java Archive)](#jars)
-
 ### 4. ⚙️ Environment Setup
 - [Manual Setup (Deprecated)](#old-manual-env-setup-not-recommended)
 - [Automated Setup with Maven](#automated-env-setup-mavenbuild-tool)
-
-### 5. 🔧 Selenium Interfaces & Methods
-- [SearchContext Interface](#1-searchcontexti)
-- [WebDriver Interface](#2-webdriver-i)
-- [JavascriptExecutor Interface](#3-javascriptexecutor-i)
-- [TakesScreenshot Interface](#4-takesscreenshot-i)
-
-### 6. 🌐 Browser Navigation
-- [Navigation Methods](#-navigation-methods-in-selenium)
-- [Get vs Navigate](#get-vs-navigate)
-
-### 7. 🔍 WebDriver & WebElement
-- [Locator Methods](#-webdriver-interface--locator-methods)
-- [Action & Property Methods](#-webelement-interface--action--property-methods)
-- [WebElement Testing Workflow](#webelements-testing-process)
+### Selenium Methods
+1. 🔧 Selenium Interfaces Methods
+     a. Selenium Interfaces and their respective method (Description)
+	   1. SEARCH CONTEXT
+	   2. WEBDRIVER
+	   3. JAVASCRIPTEXECUTOR
+	   4. SCREENSHOT
+     b. Selenium Interfaces and Method Examples (Real-Time Use Cases)
+3. 🌐 Browser Navigation Methods
+     a. Browser Navigation method (Description)
+	   1. Navigate().to()
+	   2. Refresh()
+	   3. Back()
+	   4. Forword()
+      b. Get Vs Navigate
 
 ### 8. 🧭 Locators in Selenium
 - [Locator Types](#locators)
@@ -59,11 +55,7 @@
 - [Note on `Thread.sleep()`](#wait-strategies)
 
 ### 11. 🐞 Common Exceptions
-- [NoSuchElementException](#most-common-type-of-exceptions-occur)
-- [ElementNotFoundException](#most-common-type-of-exceptions-occur)
-
 ### 12. 🔗 Practice Website
-- [Practice Resource](#practice-website)
 
 ---
 
@@ -117,14 +109,12 @@ ChromeDriver [C]      FirefoxDriver [C]     EdgeDriver [C]
 - **Architecture**:
   - **Hub**: Central point to control execution.
   - **Node(s)**: Machines where actual tests run.
-
-### 🔹 Use Case:
-
-> Suppose you want to run your tests on **Chrome + Windows**, **Firefox + Linux**, and **Edge + macOS** all at once. Selenium Grid allows you to do that using parallel test execution.
+-  Use Case:
+    Suppose you want to run your tests on **Chrome + Windows**, **Firefox + Linux**, and **Edge + macOS** all at once. Selenium Grid allows you to do that using parallel test execution.
 
 ---
-
-# HLD
+# Architecture & Design
+## High-Level Design (HLD)
 
 1. JAVA client = contains java code to call web driver methods
 2. web driver = perform method action on browser & SOMETIME capture info from browser [eg. title of web page,text display on web page]
@@ -133,7 +123,7 @@ ChromeDriver [C]      FirefoxDriver [C]     EdgeDriver [C]
    |
 3. browser
 
-# ARCH.
+## Selenium Architecture Diagram
 
 ```
             SearchContext[I] **root interface**
@@ -148,13 +138,13 @@ ChromeDriver [C]      FirefoxDriver [C]     EdgeDriver [C]
 
 ```
 
-# JARS
+## JAR Files (Java Archive)
 
 - Similar to .zip file
 - Compress all java classes,methods,interfaces into 1 single file called jar file
 - `full form` : JavaArchiveFiles
 
-# Environment Setup
+# ⚙️ Environment Setup
 
 ## Old Manual Env. Setup **Not Recommended**
 
@@ -171,23 +161,13 @@ ChromeDriver [C]      FirefoxDriver [C]     EdgeDriver [C]
 4. add selenium dependency [mvn repository]
    in boot project the version is managed by boot
 5. Update project
+-----------------------------------------------------------------------------------------
 
-# Methods Index
 
-1. INTERFACE METHODS
-   1. SEARCH CONTEXT
-   2. WEBDRIVER
-   3. JAVASCRIPTEXECUTOR
-      4.SCREENSHOT
-2. NAVIGATOR
-   1. Navigate().to()
-   2. Refresh()
-   3. Back()
-   4. Forword()
+# Selenium Methods
+## 🔧 Selenium Interfaces Methods
 
-# INTERFACES METHODS
-
-## Selenium Interfaces and Method Description
+ ## Selenium Interfaces and their respective method Description
 
 ### 1. SearchContext[I]
 
@@ -230,7 +210,7 @@ ChromeDriver [C]      FirefoxDriver [C]     EdgeDriver [C]
 | -------------------------------- | ---------------------------------------------- | ----------------------------- | ------------------------------------------------------------------------- |
 | `getScreenshotAs(OutputType<T>)` | Captures the screenshot of the browser window. | `File`, `String`, or `byte[]` | `File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);` |
 
-## Selenium Interfaces and Method Examples (Real-Time Use Cases)
+## 🏃‍♀️‍➡️Selenium Interfaces and Method Examples (Real-Time Use Cases)
 
 ---
 
@@ -279,7 +259,9 @@ ChromeDriver [C]      FirefoxDriver [C]     EdgeDriver [C]
 
 ---
 
-# 🌐 Navigation Methods in Selenium
+## 🌐 Browser Navigation Methods
+
+##  Browser Navigation method (Description)
 
 | S.No | Method                      | Description                                            | Return Type | Example Code                                   |
 | ---- | --------------------------- | ------------------------------------------------------ | ----------- | ---------------------------------------------- |
@@ -288,7 +270,22 @@ ChromeDriver [C]      FirefoxDriver [C]     EdgeDriver [C]
 | 3    | `navigate().back()`         | Navigates back to the previous page in browser history | `void`      | `driver.navigate().back();`                    |
 | 4    | `navigate().forward()`      | Moves forward to the next page in browser history      | `void`      | `driver.navigate().forward();`                 |
 
-# Get Vs Navigate
+## Get Vs Navigate
+
+
+| Feature                      | `driver.get(url)`                         | `driver.navigate().to(url)`                         |
+|-----------------------------|--------------------------------------------|-----------------------------------------------------|
+| **Purpose**                 | Opens a URL in the browser                 | Also opens a URL in the browser                     |
+| **Return Type**             | `void`                                     | `void`                                              |
+| **Navigation History**      | ❌ Does **not** maintain browser history   | ✅ Maintains browser history (allows back/forward)   |
+| **Chaining**                | ❌ Cannot be chained                        | ✅ Can be chained using `navigate()` object          |
+| **Support for Other Actions** | ❌ No support for `back()`, `forward()` etc. | ✅ Supports `back()`, `forward()`, `refresh()`     |
+| **Common Use Case**         | Basic page load                            | Page load with navigation control                   |
+| **Syntax**                  | `driver.get("https://example.com")`        | `driver.navigate().to("https://example.com")`       |
+| **Performance**             | ⚡ Slightly faster (direct load)            | 🕒 Slightly slower due to history tracking           |
+
+> **✅ Tip:**  
+> Use `get()` when simply loading a page. Use `navigate().to()` when you plan to use browser navigation (like `back()`, `forward()`).
 
 # 📌 Selenium WebDriver & WebElement Methods
 
@@ -332,9 +329,9 @@ ChromeDriver [C]      FirefoxDriver [C]     EdgeDriver [C]
 2. locate elem
 3. find elem
 4. perform action
-
-# Locators
-
+--------------------------------------------------------------------------------------------
+# 🧭 Locators in Selenium
+## Locator Types
 1. id[string] By.id("username")
 2. name[string] By.name("username")
 3. classname[string]
@@ -344,7 +341,7 @@ ChromeDriver [C]      FirefoxDriver [C]     EdgeDriver [C]
 7. cssselector[string] : tagname['attribute name'='attribute value'] input[type='password'] || id=> input#email class=>tagName.classValue
 8. xpath[string]
 
-# 🔍 Selenium Locators – Markdown Table
+# 🔍 Selenium Locator Syntax Table
 
 | S.No | Locator Type      | Syntax Example                         | Description / Usage                                                       |
 | ---- | ----------------- | -------------------------------------- | ------------------------------------------------------------------------- |
@@ -371,17 +368,16 @@ ChromeDriver [C]      FirefoxDriver [C]     EdgeDriver [C]
 
 💡 **Note**: Prefer `id`, `name`, and `cssSelector` when available — they’re usually faster and more readable.
 
-## `xpath` (String)
+##  XPath Essentials
 
 Locates elements using XPath expression.
-
-### ✅ Absolute XPath (not recommended)
-
+### Absolute & Relative XPath
+ 1. Absolute XPath (not recommended)
 ```
 /html/body/div[2]/form/input[1]
 ```
 
-### ✅ Relative XPath (preferred)
+2.  Relative XPath (preferred)
 
 ```
 //input[@type='text']                      // By attribute
@@ -393,7 +389,7 @@ Locates elements using XPath expression.
 //input[@id='email']                      // By specific attribute
 ```
 
-💡 **XPath Tips**:
+## XPath Tips & Tricks
 //_ = all elements
 //_[atribute='value'] = all matching attribute value
 //tagname = all matching tagname
@@ -426,7 +422,7 @@ Locates elements using XPath expression.
 
 ---
 
-# 📋 General Cases
+#  📋 General Test Scenarios
 
 | S.No | Task                                                 | Action Steps                                                                                                                                                                              | Link to Code  |
 | ---- | ---------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
@@ -434,18 +430,17 @@ Locates elements using XPath expression.
 | 2    | Perform manage operations (browser-level operations) | - Open browser<br>- `deleteAllCookies()`<br>- `setSize()`<br>- `setPosition()`<br>- `maximize()`                                                                                          | _To be added_ |
 | 3    | Perform navigation operations                        | - Open browser<br>- `maximize()` <br>- `deleteAllCookies()` <br>- goto url <br>- navigate to diff url <br>- navigate to previous page <br>-navigate to next page<br>-refresh current page | _To be added_ |
 
-# Wait Strategies 
+# ⏱ Wait Strategies
 In selenium we have only 2 type of wait 
 1. Implicit wait
 2. Explicit wait -> under explicit wait we have Fluent Wait
 
    NOTE: thread.sleep() method came from java its not a wait strategy of selenium.but can be used for wait but will wait for exact time period that is defined in it.
 
-# Most Common Type of Exceptions Occur
+# 🐞 Common Exceptions
 1. NoSuchElementException = synchronization problem(when your automation script run faster than the page)
 2. ElementNotFoundException = when the locator is incorrect
    
-# Practice Website
-
+# 🔗 Practice Website
 1. OrangeHRM
 2. Adactin
